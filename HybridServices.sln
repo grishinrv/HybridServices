@@ -6,6 +6,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{55102D6C-E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HybridServices.Contract", "src\HybridServices.Contract\HybridServices.Contract.csproj", "{4630B151-48D1-4A7D-B9FA-04E196EB37B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "demo\Client\Client.csproj", "{D560A398-CDAA-48D4-A79A-75F4B1D5C477}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,11 +15,16 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4630B151-48D1-4A7D-B9FA-04E196EB37B6} = {428C3397-A6FF-40BE-9541-F5B32D74E6CD}
+		{D560A398-CDAA-48D4-A79A-75F4B1D5C477} = {55102D6C-E890-416F-BA08-295917AD2759}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4630B151-48D1-4A7D-B9FA-04E196EB37B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4630B151-48D1-4A7D-B9FA-04E196EB37B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4630B151-48D1-4A7D-B9FA-04E196EB37B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4630B151-48D1-4A7D-B9FA-04E196EB37B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D560A398-CDAA-48D4-A79A-75F4B1D5C477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D560A398-CDAA-48D4-A79A-75F4B1D5C477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D560A398-CDAA-48D4-A79A-75F4B1D5C477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D560A398-CDAA-48D4-A79A-75F4B1D5C477}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

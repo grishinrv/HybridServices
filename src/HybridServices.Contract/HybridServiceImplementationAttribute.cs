@@ -1,3 +1,5 @@
+using System;
+
 namespace HybridServices.Contract
 {
     [AttributeUsage(AttributeTargets.Class)]

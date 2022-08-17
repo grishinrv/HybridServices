@@ -6,6 +6,9 @@
 # JetBrains project settings
 .idea/
 
+# MacOs special system files
+.DS_Store
+
 # User-specific files
 *.rsuser
 *.suo

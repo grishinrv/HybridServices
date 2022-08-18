@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessModule", "demo\Busi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessModuleRemoteProxy", "demo\BusinessModuleRemoteProxy\BusinessModuleRemoteProxy.csproj", "{FCA70835-2998-48EC-8032-E4B1C5A3E2EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HybridServices.Core", "src\HybridServices.Core\HybridServices.Core.csproj", "{D2A00515-F584-462D-8B7E-5FD47751207C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,7 @@ Global
 		{F8877B4B-BEC5-4A20-83D1-F4FFA3FD5722} = {55102D6C-E890-416F-BA08-295917AD2759}
 		{CCB38407-E6DD-4FB7-8390-D886990F6BA3} = {55102D6C-E890-416F-BA08-295917AD2759}
 		{FCA70835-2998-48EC-8032-E4B1C5A3E2EE} = {55102D6C-E890-416F-BA08-295917AD2759}
+		{D2A00515-F584-462D-8B7E-5FD47751207C} = {428C3397-A6FF-40BE-9541-F5B32D74E6CD}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4630B151-48D1-4A7D-B9FA-04E196EB37B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -47,5 +50,9 @@ Global
 		{FCA70835-2998-48EC-8032-E4B1C5A3E2EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCA70835-2998-48EC-8032-E4B1C5A3E2EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCA70835-2998-48EC-8032-E4B1C5A3E2EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2A00515-F584-462D-8B7E-5FD47751207C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2A00515-F584-462D-8B7E-5FD47751207C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2A00515-F584-462D-8B7E-5FD47751207C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2A00515-F584-462D-8B7E-5FD47751207C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

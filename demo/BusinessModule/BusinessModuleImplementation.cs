@@ -1,25 +1,12 @@
-﻿namespace BusinessModule
+﻿using System.Threading.Tasks;
+
+namespace BusinessModule
 {
     public class BusinessModuleImplementation : IBusinessModule
     {
-        public double Add(double a, double b)
+        public Task<double> GetResultAsync()
         {
-            return a + b;
-        }
-
-        public double Subtract(double a, double b)
-        {
-            return a - b;
-        }
-
-        public double Divide(double a, double b)
-        {
-            return a / b;
-        }
-
-        public double Multiply(double a, double b)
-        {
-            return a * b;
+            throw new System.NotImplementedException();
         }
     }
 }

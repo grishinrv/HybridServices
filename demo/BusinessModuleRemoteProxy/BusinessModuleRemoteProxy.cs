@@ -4,22 +4,12 @@ namespace BusinessModuleRemoteProxy
 {
     public class BusinessModuleRemoteProxy : IBusinessModuleProxy
     {
-        public Task<double> AddAsync(double a, double b)
+        private readonly string _businessModuleEndPoint;
+        public BusinessModuleRemoteProxy(string businessModuleEndPoint)
         {
-            throw new System.NotImplementedException();
+            _businessModuleEndPoint = businessModuleEndPoint;
         }
-
-        public Task<double> SubtractAsync(double a, double b)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<double> DivideAsync(double a, double b)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<double> MultiplyAsync(double a, double b)
+        public Task<double> GetResultAsync()
         {
             throw new System.NotImplementedException();
         }

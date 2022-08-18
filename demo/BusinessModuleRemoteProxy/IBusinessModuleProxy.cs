@@ -1,12 +1,9 @@
 using System.Threading.Tasks;
+using BusinessModule;
 
 namespace BusinessModuleRemoteProxy
 {
-    public interface IBusinessModuleProxy
+    public interface IBusinessModuleProxy : IBusinessModule
     {
-        Task<double> AddAsync(double a, double b);
-        Task<double> SubtractAsync(double a, double b);
-        Task<double> DivideAsync(double a, double b);
-        Task<double> MultiplyAsync(double a, double b);
     }
 }

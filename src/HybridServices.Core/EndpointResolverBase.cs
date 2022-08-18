@@ -13,6 +13,11 @@ namespace HybridServices.Core
             _endpoints = endpoints;
         }
 
+        public void ConfigureEndpoints()
+        {
+            
+        }
+
         private EndpointDescriptor MatchEndpoint(ParameterInfo[] parameters, string methodName = "", string classShortName = "")
         {
             List<EndpointDescriptor> matchedEndpoints = null;

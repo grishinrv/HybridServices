@@ -1,0 +1,8 @@
+services:
+  BusinessModule.BusinessModuleImplementation:
+    endpoints:
+      GetResultAsync:
+        - none
+      GetResultWithParamAsync:
+        - System.String=0
+        

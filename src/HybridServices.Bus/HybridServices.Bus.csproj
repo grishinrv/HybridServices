@@ -11,6 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\HybridServices.Transport\HybridServices.Transport.csproj" />
       <ProjectReference Include="..\HybridServices.Utils\HybridServices.Utils.csproj" />
     </ItemGroup>
 

@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HybridServices.Transport", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HybridServices.Bus", "src\HybridServices.Bus\HybridServices.Bus.csproj", "{B7CDB67F-D773-4D84-8CA7-09B4C898E59A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HybridServices.Utils", "src\HybridServices.Utils\HybridServices.Utils.csproj", "{3017FD01-F646-45D2-B858-096A31071745}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,7 @@ Global
 		{D2A00515-F584-462D-8B7E-5FD47751207C} = {428C3397-A6FF-40BE-9541-F5B32D74E6CD}
 		{2F1D699A-1F17-46DE-ADAF-9E79C797B29F} = {428C3397-A6FF-40BE-9541-F5B32D74E6CD}
 		{B7CDB67F-D773-4D84-8CA7-09B4C898E59A} = {428C3397-A6FF-40BE-9541-F5B32D74E6CD}
+		{3017FD01-F646-45D2-B858-096A31071745} = {428C3397-A6FF-40BE-9541-F5B32D74E6CD}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4630B151-48D1-4A7D-B9FA-04E196EB37B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -61,5 +64,9 @@ Global
 		{B7CDB67F-D773-4D84-8CA7-09B4C898E59A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7CDB67F-D773-4D84-8CA7-09B4C898E59A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7CDB67F-D773-4D84-8CA7-09B4C898E59A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3017FD01-F646-45D2-B858-096A31071745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3017FD01-F646-45D2-B858-096A31071745}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3017FD01-F646-45D2-B858-096A31071745}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3017FD01-F646-45D2-B858-096A31071745}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

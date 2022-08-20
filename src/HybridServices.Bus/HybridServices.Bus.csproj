@@ -10,4 +10,8 @@
       <PackageReference Include="MessagePack" Version="2.4.35" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\HybridServices.Utils\HybridServices.Utils.csproj" />
+    </ItemGroup>
+
 </Project>

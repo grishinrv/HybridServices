@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 using HybridServices.Transport;
 using HybridServices.Utils.Helpers;
@@ -21,6 +22,7 @@ namespace HybridServices.Bus
         private readonly List<Task> _tcpListnerTasks = new List<Task>();
         private readonly ushort _maxListeners;
 
+        private readonly ManualResetEvent _allDone = new ManualResetEvent(false);
         public bool IsRunning { get; private set; }
 
         /// <summary>
@@ -92,5 +94,64 @@ namespace HybridServices.Bus
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="port"></param>
+        /// <param name="maxPendingConnections">The backlog parameter is limited to different values depending on the Operating System.
+        /// You may specify a higher value, but the backlog will be limited based on the Operating System.
+        /// </param>
+        private void StartListening(int port, int maxPendingConnections = 64)
+        {
+            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
+            IPAddress ipAddress = ipHostInfo.AddressList[0];
+            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, port);
+
+            Socket lictener = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
+            try
+            {
+                lictener.Bind(localEndPoint);
+                lictener.Listen(maxPendingConnections);
+
+                while (true)
+                {
+                    // set event to non-signaled state.
+                    _allDone.Reset();
+                    
+                    // Start an asynchronous socket to listen for connections
+                    _log("Waiting for a connection...");
+                    lictener.BeginAccept(AcceptCallback, lictener);
+                    
+                    // wait until a connection is made before continuing.
+                    _allDone.WaitOne();
+                }
+            }
+            catch (Exception e)
+            {
+                _error(e);
+            }
+        }
+
+        private void AcceptCallback(IAsyncResult result)
+        {
+            // Signal connection acceptance thread to continue.
+            _allDone.Set();
+            
+            // Get the socket that handles the client requests.
+            Socket listener = (Socket)result.AsyncState;
+            Socket handler = listener.EndAccept(result);
+
+            SocketReader reader = new SocketReader()
+            {
+                ClientSocket = handler
+            };
+            handler.BeginReceive(reader.Buffer, 0, SocketReader.BufferSize, SocketFlags.None, ReadCallback, reader);
+        }
+
+        private void ReadCallback(IAsyncResult result)
+        {
+            
+        }
     }
 }

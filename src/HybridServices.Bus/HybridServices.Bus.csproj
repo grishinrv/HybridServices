@@ -4,6 +4,7 @@
         <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>disable</Nullable>
+	<DefineConstants>NETSTANDARD2_1</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup>

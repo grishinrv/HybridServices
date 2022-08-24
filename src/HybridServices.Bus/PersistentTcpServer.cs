@@ -1,12 +1,14 @@
 using System;
+using MessagePack;
 using System.Collections.Generic;
+using System.IO.Pipelines;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using HybridServices.Transport;
 using HybridServices.Utils.Helpers;
-using MessagePack;
+using static System.Net.Sockets.SocketTaskExtensions;
 
 namespace HybridServices.Bus
 {
@@ -152,6 +154,42 @@ namespace HybridServices.Bus
         private void ReadCallback(IAsyncResult result)
         {
             
+        }
+        
+        private Task ProcessMessageAsync(Socket socket)
+        {
+            Pipe pipe = new Pipe();
+            Task writing = FillPipeAsync(socket, pipe.Writer);
+            // Task reading = ReadPipeAsync(pipe.Reader);
+            // return Task.WhenAll(writing, reading);
+            return writing;
+        }
+
+        private async Task FillPipeAsync(Socket socket, PipeWriter writer)
+        {
+            const int minimumBufferSize = 512;
+            while (true)
+            {
+#if NETSTANDARD2_1
+                Memory<byte> memory = writer.GetMemory(minimumBufferSize); 
+#else
+                Span<byte> memory = writer.GetSpan(minimumBufferSize);
+#endif
+                try
+                {
+#if NETSTANDARD2_1                    
+                    int bytesRead = await socket.ReceiveAsync(memory, SocketFlags.None);
+#else
+                    int bytesRead = await socket.ReceiveAsync(memory, SocketFlags.None);
+#endif
+
+                }
+                catch (Exception e)
+                {
+                    _error(e);
+                    break;
+                }
+            }
         }
     }
 }

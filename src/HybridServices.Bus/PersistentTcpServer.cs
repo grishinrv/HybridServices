@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using HybridServices.Transport;
 using HybridServices.Utils.Helpers;
-using static System.Net.Sockets.SocketTaskExtensions;
 
 namespace HybridServices.Bus
 {

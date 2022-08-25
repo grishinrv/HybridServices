@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using MessagePack;
 using System.Collections.Generic;
 using System.IO.Pipelines;
@@ -159,36 +160,87 @@ namespace HybridServices.Bus
         {
             Pipe pipe = new Pipe();
             Task writing = FillPipeAsync(socket, pipe.Writer);
-            // Task reading = ReadPipeAsync(pipe.Reader);
-            // return Task.WhenAll(writing, reading);
-            return writing;
+            Task reading = ReadPipeAsync(pipe.Reader);
+            return Task.WhenAll(writing, reading);
         }
 
+        /// <summary>
+        /// Reads from the Socket and writes into the PipeWriter.
+        /// </summary>
+        /// <param name="socket"></param>
+        /// <param name="writer"></param>
         private async Task FillPipeAsync(Socket socket, PipeWriter writer)
         {
             const int minimumBufferSize = 512;
             while (true)
             {
-#if NETSTANDARD2_1
                 Memory<byte> memory = writer.GetMemory(minimumBufferSize); 
-#else
-                Span<byte> memory = writer.GetSpan(minimumBufferSize);
-#endif
                 try
                 {
-#if NETSTANDARD2_1                    
                     int bytesRead = await socket.ReceiveAsync(memory, SocketFlags.None);
-#else
-                    int bytesRead = await socket.ReceiveAsync(memory, SocketFlags.None);
-#endif
-
+                    if (bytesRead == 0)
+                        break;
+                    // Tell the PipeWriter hiw much was read from the Socket
+                    writer.Advance(bytesRead);
                 }
                 catch (Exception e)
                 {
                     _error(e);
                     break;
                 }
+                
+                // Make the data available to the PipeReader
+                FlushResult result = await writer.FlushAsync();
+                if (result.IsCanceled)
+                    break;
             }
+            
+            // Tell the PipeReader that there is no more data coming
+            await writer.CompleteAsync();
+        }
+
+        /// <summary>
+        /// Reads from the PipeReader and parses incoming messages.
+        /// </summary>
+        /// <param name="reader"></param>
+        private async Task ReadPipeAsync(PipeReader reader)
+        {
+            while (true)
+            {
+                ReadResult result = await reader.ReadAsync();
+                ReadOnlySequence<byte> buffer = result.Buffer;
+                SequencePosition? position = null;
+
+                do
+                {
+                    // Look for a end of message marker in the buffer
+                    position = buffer.PositionOf((byte)'\n'); // todo
+
+                    if (position != null)
+                    {
+                        ProcessMessage(buffer.Slice(0, position.Value));
+                        // Skip the message + the marker position
+                        buffer = buffer.Slice(buffer.GetPosition(1, position.Value)); // todo
+                    }
+
+
+                } while (position != null);
+                
+                // Tell the PipeReader how much of the buffer we have consumed
+                reader.AdvanceTo(buffer.Start, buffer.End);
+                
+                // Stop reading if there's no more data coming
+                if (result.IsCompleted)
+                    break;
+            }
+            
+            // Mark the PipeReader as complete
+            await reader.CompleteAsync();
+        }
+
+        private void ProcessMessage(ReadOnlySequence<byte> message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

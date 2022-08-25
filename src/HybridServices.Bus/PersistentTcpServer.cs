@@ -202,7 +202,7 @@ namespace HybridServices.Bus
         /// <summary>
         /// Reads from the PipeReader and parses incoming messages.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">Can look at data without consuming it</param>
         private async Task ReadPipeAsync(PipeReader reader)
         {
             while (true)
@@ -227,6 +227,8 @@ namespace HybridServices.Bus
                 } while (position != null);
                 
                 // Tell the PipeReader how much of the buffer we have consumed
+                // these buffers are no longer required by the reader so they can be discarded
+                // (for example returned to the underlying buffer pool)
                 reader.AdvanceTo(buffer.Start, buffer.End);
                 
                 // Stop reading if there's no more data coming
